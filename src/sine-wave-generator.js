@@ -285,10 +285,17 @@ class SineWaveGenerator {
 
     const easing = wave.easing || Ease.sineInOut;
 
+    // const gradient = this.ctx.createLinearGradient(0, 0, this.el.width, 0);
+    // gradient.addColorStop(0, "rgba(25, 255, 255, 0)");
+    // gradient.addColorStop(0.5, "rgba(255, 25, 255, 0.75)");
+    // gradient.addColorStop(1, "rgba(255, 255, 25, 0)");
+
     const gradient = this.ctx.createLinearGradient(0, 0, this.el.width, 0);
-    gradient.addColorStop(0, "rgba(25, 255, 255, 0)");
-    gradient.addColorStop(0.5, "rgba(255, 25, 255, 0.75)");
-    gradient.addColorStop(1, "rgba(255, 255, 25, 0)");
+    gradient.addColorStop(0, "rgba(0, 255, 255, 0)");
+    gradient.addColorStop(0.1, "rgba(10, 255, 255, 0.75)");
+    gradient.addColorStop(0.5, "rgba(255, 0, 255, 1)");
+    gradient.addColorStop(0.9, "rgba(255, 255, 10, 0.75)");
+    gradient.addColorStop(1, "rgba(255, 255, 0, 0)");
 
     const startY = this.el.height / 2;
     this.ctx.beginPath();
@@ -305,6 +312,7 @@ class SineWaveGenerator {
     }
 
     this.ctx.strokeStyle = gradient;
+    this.ctx.lineWidth = 5;
     this.ctx.stroke();
 
     wave.phase += wave.speed * Math.PI * 2;

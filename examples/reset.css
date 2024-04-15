@@ -177,7 +177,7 @@ img {
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
     :root {
-        --background-color: #2a2530; /* Dark Purple */
+        --background-color: #000; /* Black */
         --primary-color: #dedede; /* Light Gray */
         --secondary-color: #007bff; /* Blue (default macOS accent color) */
         --tertiary-color: #dedede; /* Light Gray */
@@ -214,7 +214,7 @@ body {
     display: grid;
     gap: var(--golden-ratio)vh;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: 1;
     padding: 20px;
 }
 
@@ -244,14 +244,19 @@ section {
     position: relative;
 }
 
+.column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+}
+
 canvas {
     /* Calculate width and height using the golden ratio */
-    height: calc(40vh / var(--golden-ratio));
-    max-height: 100%;
-    max-width: 100%;
-    min-height: calc(40vh / var(--golden-ratio));
-    min-width: calc(40vw / var(--golden-ratio));
-    width: calc(40vw / var(--golden-ratio));
+    height: 19vh;
+    width: 450px;
 }
 
 /* Animations and transitions */

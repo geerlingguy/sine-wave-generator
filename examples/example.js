@@ -50,170 +50,115 @@ document.addEventListener("DOMContentLoaded", function () {
 	const LINE_WIDTH = 2;
 	const SPEED = FIBONACCI;
 
-	// Example 1: Basic Single Wave
-	const canvas1 = document.getElementById("sineCanvas1");
-	const sineWavesGenerator = new SineWaveGenerator({ el: canvas1 });
+	// Multiple Waves with Different Configurations
+	const canvas = document.getElementById("sineCanvas");
+	const sineWavesGenerator = new SineWaveGenerator({ el: canvas });
 	sineWavesGenerator.start(); // Start the animation
-
-	// To add a wave dynamically:
 	sineWavesGenerator.addWave({
-		amplitude: 10,
-		wavelength: 50,
+		amplitude: 90,
+		wavelength: 20,
 		strokeStyle: DEFAULT_STROKE_STYLE,
 		speed: 2,
 		easing: Ease.sineInOut,
+		phase: 25,
+	});
+	sineWavesGenerator.addWave({
+		amplitude: 32,
+		wavelength: 50,
+		strokeStyle: DEFAULT_STROKE_STYLE,
+		speed: 2.1,
+		easing: Ease.sineInOut,
+		phase: 90,
+	});
+	sineWavesGenerator.addWave({
+		amplitude: 46,
+		wavelength: 30,
+		strokeStyle: DEFAULT_STROKE_STYLE,
+		speed: 1.4,
+		easing: Ease.sineInOut,
+		phase: -20,
+	});
+	sineWavesGenerator.addWave({
+		amplitude: 21,
+		wavelength: 30,
+		strokeStyle: DEFAULT_STROKE_STYLE,
+		speed: 3.2,
+		easing: Ease.sineInOut,
+		phase: 300,
+	});
+		sineWavesGenerator.addWave({
+		amplitude: 108,
+		wavelength: 30,
+		strokeStyle: DEFAULT_STROKE_STYLE,
+		speed: 1.5,
+		easing: Ease.sineInOut,
+		phase: 0,
 	});
 
-	// Example 2: Multiple Waves with Different Configurations
+	// Basic Single Wave 1
+	const canvas1 = document.getElementById("sineCanvas1");
+	const sineWavesGenerator1 = new SineWaveGenerator({ el: canvas1 });
+	sineWavesGenerator1.start(); // Start the animation
+	sineWavesGenerator1.addWave({
+		amplitude: 90,
+		wavelength: 20,
+		strokeStyle: DEFAULT_STROKE_STYLE,
+		speed: 2,
+		easing: Ease.sineInOut,
+		phase: 25,
+	});
+
+	// Basic Single Wave 2
 	const canvas2 = document.getElementById("sineCanvas2");
 	const sineWavesGenerator2 = new SineWaveGenerator({ el: canvas2 });
 	sineWavesGenerator2.start(); // Start the animation
-
-	// To add a wave dynamically:
 	sineWavesGenerator2.addWave({
-		amplitude: 20,
-		wavelength: 100,
-		strokeStyle: DEFAULT_STROKE_STYLE,
-		speed: 2,
-		easing: Ease.sineInOut,
-	});
-	sineWavesGenerator2.addWave({
-		amplitude: 10,
+		amplitude: 32,
 		wavelength: 50,
 		strokeStyle: DEFAULT_STROKE_STYLE,
-		speed: 2,
+		speed: 2.1,
 		easing: Ease.sineInOut,
+		phase: 90,
 	});
 
-	// Example 3: Interactive Wave with Mouse Movement
+	// Basic Single Wave 3
 	const canvas3 = document.getElementById("sineCanvas3");
 	const sineWavesGenerator3 = new SineWaveGenerator({ el: canvas3 });
 	sineWavesGenerator3.start(); // Start the animation
-
-	// To add a wave dynamically:
 	sineWavesGenerator3.addWave({
-		amplitude: 10,
-		wavelength: 50,
+		amplitude: 46,
+		wavelength: 30,
 		strokeStyle: DEFAULT_STROKE_STYLE,
-		speed: 2,
+		speed: 1.4,
 		easing: Ease.sineInOut,
-	});
-	// Easing function for smoother transitions
-	function smoothStep(start, end, t) {
-		return start + (end - start) * t * t * (3 - 2 * t);
-	}
-
-	canvas3.addEventListener("mousemove", (event) => {
-		const mouseX = event.clientX / canvas3.width;
-		const mouseY = event.clientY / canvas3.height;
-
-		const maxAmplitude = 500; // Maximum amplitude adjustment
-		const maxWavelength = 500; // Maximum wavelength adjustment
-
-		const center = { x: 0.5, y: 0.5 }; // Center of the canvas
-
-		const distanceX = Math.abs(center.x - mouseX); // Distance from mouse to canvas center horizontally
-		const distanceY = Math.abs(center.y - mouseY); // Distance from mouse to canvas center vertically
-
-		const targetAmplitude = maxAmplitude * (1 - distanceY); // Adjust amplitude based on vertical mouse movement
-		const targetWavelength = maxWavelength * (1 - distanceX); // Adjust wavelength based on horizontal mouse movement
-
-		sineWavesGenerator3.waves.forEach((wave) => {
-			// Interpolate wave amplitude smoothly
-			wave.amplitude = smoothStep(wave.amplitude, targetAmplitude, 1); // Adjust the value '0.1' for the desired smoothness
-			// Interpolate wave wavelength smoothly
-			wave.wavelength = smoothStep(wave.wavelength, targetWavelength, 1); // Adjust the value '0.1' for the desired smoothness
-
-			// Change phase based on mouse Y position
-			wave.phase = mouseY * Math.PI * 2;
-		});
+		phase: -20,
 	});
 
-	// Example 4: Dynamic Wave Management
+	// Basic Single Wave 4
 	const canvas4 = document.getElementById("sineCanvas4");
 	const sineWavesGenerator4 = new SineWaveGenerator({ el: canvas4 });
 	sineWavesGenerator4.start(); // Start the animation
+	sineWavesGenerator4.addWave({
+		amplitude: 21,
+		wavelength: 30,
+		strokeStyle: DEFAULT_STROKE_STYLE,
+		speed: 3.2,
+		easing: Ease.sineInOut,
+		phase: 300,
+	});
 
-	// Adding waves dynamically
-	const wavesConfig = [
-		{
-			amplitude: 10,
-			wavelength: DEFAULT_SEGMENT_LENGTH,
-			strokeStyle: DEFAULT_STROKE_STYLE,
-			speed: SPEED,
-			easing: Ease.sineInOut,
-		},
-		{
-			amplitude: 20,
-			wavelength: DEFAULT_SEGMENT_LENGTH,
-			strokeStyle: DEFAULT_STROKE_STYLE,
-			speed: SPEED,
-			easing: Ease.sineInOut,
-		},
-		{
-			amplitude: 30,
-			wavelength: DEFAULT_SEGMENT_LENGTH,
-			strokeStyle: DEFAULT_STROKE_STYLE,
-			speed: SPEED,
-			easing: Ease.sineInOut,
-		},
-		{
-			amplitude: 40,
-			wavelength: DEFAULT_SEGMENT_LENGTH,
-			strokeStyle: DEFAULT_STROKE_STYLE,
-			speed: SPEED,
-			easing: Ease.sineInOut,
-		},
-		{
-			amplitude: 50,
-			wavelength: DEFAULT_SEGMENT_LENGTH,
-			strokeStyle: DEFAULT_STROKE_STYLE,
-			speed: SPEED,
-			easing: Ease.sineInOut,
-		},
-		{
-			amplitude: 60,
-			wavelength: DEFAULT_SEGMENT_LENGTH,
-			strokeStyle: DEFAULT_STROKE_STYLE,
-			speed: SPEED,
-			easing: Ease.sineInOut,
-		},
-	];
-
-	function manageWaves() {
-		const removeInterval = 500; // 0.5 seconds
-		const addInterval = 500; // 0.5 seconds
-
-		let currentIndex = 0;
-		let removing = false;
-
-		const removeWave = () => {
-			if (sineWavesGenerator4.waves.length > 1) {
-				sineWavesGenerator4.removeWave(0);
-				setTimeout(removeWave, removeInterval);
-			} else {
-				removing = false; // Reset the removing flag
-				setTimeout(addWave, addInterval);
-			}
-		};
-
-		const addWave = () => {
-			if (sineWavesGenerator4.waves.length < 6) {
-				sineWavesGenerator4.addWave(wavesConfig[currentIndex]);
-				currentIndex = (currentIndex + 1) % wavesConfig.length;
-				setTimeout(addWave, addInterval);
-			} else {
-				if (!removing) {
-					removing = true; // Set the removing flag
-					setTimeout(removeWave, removeInterval);
-				}
-			}
-		};
-
-		if (!removing) {
-			addWave();
-		}
-	}
+	// Basic Single Wave 5
+	const canvas5 = document.getElementById("sineCanvas5");
+	const sineWavesGenerator5 = new SineWaveGenerator({ el: canvas5 });
+	sineWavesGenerator5.start(); // Start the animation
+	sineWavesGenerator5.addWave({
+		amplitude: 108,
+		wavelength: 30,
+		strokeStyle: DEFAULT_STROKE_STYLE,
+		speed: 1.5,
+		easing: Ease.sineInOut,
+		phase: 0,
+	});
 
 	// Start the process
 	manageWaves();
